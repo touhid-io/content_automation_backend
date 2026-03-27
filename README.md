@@ -151,11 +151,13 @@ content-automation-engine/
 │   │   └── publisher.py
 │   ├── utils/
 │   │   ├── datetime.py
+│   │   ├── db.py
 │   │   └── exceptions.py
 │   └── main.py
 ├── sql/
 │   └── schema.sql
 ├── tests/
+│   ├── conftest.py
 │   └── test_text_cleaner_service.py
 ├── .env.example
 ├── Dockerfile
@@ -304,9 +306,10 @@ A few practical fields were included to make the automation system production-fr
 3. It loads encrypted user tokens.
 4. It decrypts tokens using Fernet-based encryption.
 5. It publishes the post to Facebook.
-6. If Telegram credentials are available, it also publishes to Telegram.
-7. It updates the post status to `Published`.
-8. It sends a success notification to the admin Telegram chat.
+6. It immediately marks the post as `Published` and sets `facebook_publish_status` to `Published`.
+7. If Telegram credentials are available, it also publishes to Telegram.
+8. It updates `telegram_publish_status` to `Published`, `Skipped`, or `Failed` accordingly.
+9. It sends a success notification to the admin Telegram chat.
 
 ---
 
@@ -584,6 +587,7 @@ pytest
 
 Currently included:
 - basic text cleaner unit test
+- `conftest.py` for correct test path resolution
 
 You should add more tests for:
 - YouTube RSS parsing
