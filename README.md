@@ -69,7 +69,7 @@ For each connected channel:
 - fetches recent YouTube videos from RSS
 - avoids duplicate processing using `source_video_id`
 - extracts transcript from the custom transcript API
-- generates an article with Gemini 1.5 Pro
+- generates an article with Gemini 3.1 Pro
 - cleans the generated text using regex rules
 - stores the output in `posts` as `Draft`
 
@@ -106,7 +106,7 @@ Runs every 5 minutes.
 
 ### AI integration
 - Google Gen AI SDK (`google-genai`)
-- Gemini 1.5 Pro
+- Gemini 3.1 Pro
 
 ### HTTP and integrations
 - `httpx` for async HTTP calls
@@ -201,7 +201,7 @@ LOG_LEVEL=INFO
 - `SUPABASE_SERVICE_ROLE_KEY`: service role key used by the backend for secure background writes and reads
 
 #### Gemini
-- `GEMINI_API_KEY`: API key used to call Gemini 1.5 Pro
+- `GEMINI_API_KEY`: API key used to call Gemini 3.1 Pro
 
 #### Transcript extraction
 - `YT_EXTRACTOR_API_KEY`: API key used by the custom transcript extractor service
@@ -294,7 +294,7 @@ A few practical fields were included to make the automation system production-fr
 4. It fetches recent channel videos via YouTube RSS.
 5. It skips already-processed videos using `source_video_id`.
 6. It calls the custom transcript extraction API.
-7. It sends the transcript to Gemini 1.5 Pro.
+7. It sends the transcript to Gemini 3.1 Pro.
 8. It injects the dynamic instruction:
    - `Strictly write the article in approximately [target_word_count] words.`
 9. It cleans the text using regex rules.
