@@ -11,7 +11,7 @@ from app.utils.exceptions import ApplicationError
 
 
 class AIService:
-    MODEL_NAME: str = "gemini-1.5-pro"
+    MODEL_NAME: str = "gemini-3.1-pro-preview"
     _client: ClassVar[genai.Client | None] = None
 
     @classmethod
