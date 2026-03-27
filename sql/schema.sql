@@ -70,6 +70,12 @@ alter table if exists public.posts
     add column if not exists facebook_publish_status text not null default 'Pending',
     add column if not exists telegram_publish_status text not null default 'Pending';
 
+alter table if exists public.posts
+    add constraint if not exists posts_facebook_publish_status_check
+        check (facebook_publish_status in ('Pending', 'Published', 'Failed', 'Skipped')),
+    add constraint if not exists posts_telegram_publish_status_check
+        check (telegram_publish_status in ('Pending', 'Published', 'Failed', 'Skipped'));
+
 create index if not exists idx_connected_channels_user_id on public.connected_channels (user_id);
 create index if not exists idx_connected_channels_youtube_channel_id on public.connected_channels (youtube_channel_id);
 create index if not exists idx_posts_user_id on public.posts (user_id);
